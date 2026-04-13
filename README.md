@@ -18,7 +18,6 @@ Innova Flor es un vivero costarricense que vende plantas ornamentales, maceteros
 | Framework | Express.js |
 | Base de datos | MongoDB (driver nativo, sin Mongoose) |
 | Frontend | HTML5 + CSS3 + Bootstrap 5 |
-| Tema visual | AntiGravity CSS |
 | Entorno | XAMPP / localhost |
 
 ---
