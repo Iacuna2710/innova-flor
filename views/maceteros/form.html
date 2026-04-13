@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nuevo Macetero – Innova Flor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>body { background-color: #f8fdf9; } nav.navbar { background-color: #1b4332; }</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="/">🌿 Innova Flor</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/plantas">🌱 Plantas</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/maceteros">🪴 Maceteros</a></li>
+        <li class="nav-item"><a class="nav-link" href="/insumos">🧪 Insumos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/clientes">👤 Clientes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/proveedores">🏭 Proveedores</a></li>
+        <li class="nav-item"><a class="nav-link" href="/ventas">💰 Ventas</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-4" style="max-width:600px">
+  <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="/maceteros">Maceteros</a></li><li class="breadcrumb-item active">Nuevo</li></ol></nav>
+  <div class="card shadow-sm">
+    <div class="card-header bg-success text-white fw-bold">🪴 Nuevo Macetero</div>
+    <div class="card-body">
+      <div id="alerta" class="d-none"></div>
+      <div class="mb-3"><label class="form-label">ID (código)</label> <input type="text" id="id" class="form-control" readonly/></div>
+      <div class="mb-3"><label class="form-label">Material</label><input type="text" id="material" class="form-control" placeholder="cerámica, plástico, barro..."/></div>
+      <div class="mb-3"><label class="form-label">Color</label><input type="text" id="color" class="form-control"/></div>
+      <div class="mb-3"><label class="form-label">Estilo</label><input type="text" id="estilo" class="form-control" placeholder="minimalista, rústico, moderno..."/></div>
+      <div class="row">
+        <div class="col mb-3"><label class="form-label">Precio (₡)</label><input type="number" id="precio" class="form-control" min="0"/></div>
+        <div class="col mb-3"><label class="form-label">Stock</label><input type="number" id="stock" class="form-control" min="0"/></div>
+      </div>
+      <div class="mb-3 form-check"><input type="checkbox" id="personalizable" class="form-check-input"/><label class="form-check-label" for="personalizable">Personalizable</label></div>
+      <div class="mb-3 form-check"><input type="checkbox" id="disponible" class="form-check-input" checked/><label class="form-check-label" for="disponible">Disponible</label></div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-success" onclick="guardar()">Guardar</button>
+        <a href="/maceteros" class="btn btn-outline-secondary">Cancelar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  async function generarId() {
+  const res = await fetch("/maceteros/api");
+  const data = await res.json();
+  document.getElementById("id").value = "MAC-" + String(data.length + 1).padStart(3, "0");
+}
+generarId();
+  async function guardar() {
+    const body = {
+      _id: document.getElementById("id").value.trim(),
+      codigo: document.getElementById("id").value.trim(),
+      material: document.getElementById("material").value.trim(),
+      color: document.getElementById("color").value.trim(),
+      estilo: document.getElementById("estilo").value.trim(),
+      precio: Number(document.getElementById("precio").value),
+      stock: Number(document.getElementById("stock").value),
+      personalizable: document.getElementById("personalizable").checked,
+      disponible: document.getElementById("disponible").checked
+    };
+    const res = await fetch("/maceteros/api", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const alerta = document.getElementById("alerta");
+    if (res.ok) { alerta.className = "alert alert-success"; alerta.textContent = "Macetero creado."; alerta.classList.remove("d-none"); setTimeout(() => window.location.href = "/maceteros", 1200); }
+    else { alerta.className = "alert alert-danger"; alerta.textContent = "Error al guardar."; alerta.classList.remove("d-none"); }
+  }
+</script>
+</body>
+</html>

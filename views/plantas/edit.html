@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editar Planta – Innova Flor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body { background-color: #f8fdf9; }
+    nav.navbar { background-color: #1b4332; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="/">🌿 Innova Flor</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="/plantas">🌱 Plantas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/maceteros">🪴 Maceteros</a></li>
+        <li class="nav-item"><a class="nav-link" href="/insumos">🧪 Insumos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/clientes">👤 Clientes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/proveedores">🏭 Proveedores</a></li>
+        <li class="nav-item"><a class="nav-link" href="/ventas">💰 Ventas</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4" style="max-width:600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/plantas">Plantas</a></li>
+      <li class="breadcrumb-item active">Editar planta</li>
+    </ol>
+  </nav>
+
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white fw-bold">✏️ Editar Planta</div>
+    <div class="card-body">
+      <div id="alerta" class="d-none"></div>
+      <div class="mb-3">
+        <label class="form-label">ID</label>
+        <input type="text" id="id" class="form-control" readonly/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nombre común</label>
+        <input type="text" id="nombre_comun" class="form-control"/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nombre científico</label>
+        <input type="text" id="nombre_cientifico" class="form-control"/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Tipo</label>
+        <select id="tipo" class="form-select">
+          <option value="interior">Interior</option>
+          <option value="exterior">Exterior</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col mb-3">
+          <label class="form-label">Precio (₡)</label>
+          <input type="number" id="precio" class="form-control" min="0"/>
+        </div>
+        <div class="col mb-3">
+          <label class="form-label">Stock</label>
+          <input type="number" id="stock" class="form-control" min="0"/>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea id="descripcion" class="form-control" rows="2"></textarea>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" id="disponibilidad" class="form-check-input"/>
+        <label class="form-check-label" for="disponibilidad">Disponible</label>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary" onclick="actualizar()">Actualizar</button>
+        <a href="/plantas" class="btn btn-outline-secondary">Cancelar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const id = window.location.pathname.split("/").pop();
+
+  async function cargar() {
+    const res = await fetch(`/plantas/api/${id}`);
+    if (!res.ok) { alert("Planta no encontrada"); return; }
+    const p = await res.json();
+    document.getElementById("id").value = p._id;
+    document.getElementById("nombre_comun").value = p.nombre_comun;
+    document.getElementById("nombre_cientifico").value = p.nombre_cientifico;
+    document.getElementById("tipo").value = p.tipo;
+    document.getElementById("precio").value = p.precio;
+    document.getElementById("stock").value = p.stock;
+    document.getElementById("descripcion").value = p.descripcion;
+    document.getElementById("disponibilidad").checked = p.disponibilidad;
+  }
+
+  async function actualizar() {
+    const body = {
+      nombre_comun: document.getElementById("nombre_comun").value.trim(),
+      nombre_cientifico: document.getElementById("nombre_cientifico").value.trim(),
+      tipo: document.getElementById("tipo").value,
+      precio: Number(document.getElementById("precio").value),
+      stock: Number(document.getElementById("stock").value),
+      descripcion: document.getElementById("descripcion").value.trim(),
+      disponibilidad: document.getElementById("disponibilidad").checked
+    };
+
+    const res = await fetch(`/plantas/api/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+
+    const alerta = document.getElementById("alerta");
+    if (res.ok) {
+      alerta.className = "alert alert-success";
+      alerta.textContent = "Planta actualizada exitosamente.";
+      alerta.classList.remove("d-none");
+      setTimeout(() => window.location.href = "/plantas", 1200);
+    } else {
+      alerta.className = "alert alert-danger";
+      alerta.textContent = "Error al actualizar.";
+      alerta.classList.remove("d-none");
+    }
+  }
+
+  cargar();
+</script>
+</body>
+</html>

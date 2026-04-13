@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Innova Flor – Inicio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body { background-color: #f8fdf9; }
+    .hero { background: linear-gradient(135deg, #2d6a4f, #52b788); color: white; padding: 80px 0; }
+    .card-modulo { border: none; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); transition: transform .2s; }
+    .card-modulo:hover { transform: translateY(-6px); }
+    .icon-big { font-size: 2.8rem; }
+    footer { background-color: #2d6a4f; color: #d8f3dc; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1b4332;">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="/">🌿 Innova Flor</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/plantas">🌱 Plantas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/maceteros">🪴 Maceteros</a></li>
+        <li class="nav-item"><a class="nav-link" href="/insumos">🧪 Insumos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/clientes">👤 Clientes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/proveedores">🏭 Proveedores</a></li>
+        <li class="nav-item"><a class="nav-link" href="/ventas">💰 Ventas</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="hero text-center">
+  <div class="container">
+    <h1 class="display-4 fw-bold">🌿 Innova Flor</h1>
+    <p class="lead mt-2">Sistema de gestión para vivero – Panel de control</p>
+  </div>
+</div>
+
+<div class="container my-5">
+  <h4 class="text-muted mb-4">Módulos del sistema</h4>
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card card-modulo p-4 text-center h-100">
+        <div class="icon-big mb-2">🌱</div>
+        <h5 class="fw-bold">Plantas</h5>
+        <p class="text-muted small">Gestión de especies, stock y disponibilidad.</p>
+        <a href="/plantas" class="btn btn-success mt-auto">Ir al módulo</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-modulo p-4 text-center h-100">
+        <div class="icon-big mb-2">🪴</div>
+        <h5 class="fw-bold">Maceteros</h5>
+        <p class="text-muted small">Materiales, estilos, colores y stock.</p>
+        <a href="/maceteros" class="btn btn-success mt-auto">Ir al módulo</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-modulo p-4 text-center h-100">
+        <div class="icon-big mb-2">🧪</div>
+        <h5 class="fw-bold">Insumos</h5>
+        <p class="text-muted small">Sustratos, fertilizantes y herramientas.</p>
+        <a href="/insumos" class="btn btn-success mt-auto">Ir al módulo</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-modulo p-4 text-center h-100">
+        <div class="icon-big mb-2">👤</div>
+        <h5 class="fw-bold">Clientes</h5>
+        <p class="text-muted small">Registro y tipo de clientes del vivero.</p>
+        <a href="/clientes" class="btn btn-success mt-auto">Ir al módulo</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-modulo p-4 text-center h-100">
+        <div class="icon-big mb-2">🏭</div>
+        <h5 class="fw-bold">Proveedores</h5>
+        <p class="text-muted small">Contactos y condiciones de pago.</p>
+        <a href="/proveedores" class="btn btn-success mt-auto">Ir al módulo</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-modulo p-4 text-center h-100">
+        <div class="icon-big mb-2">💰</div>
+        <h5 class="fw-bold">Ventas</h5>
+        <p class="text-muted small">Registro de transacciones y facturas.</p>
+        <a href="/ventas" class="btn btn-success mt-auto">Ir al módulo</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="text-center py-3 mt-5">
+  <small>Innova Flor © 2026</small>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
