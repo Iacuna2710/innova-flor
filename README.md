@@ -13,12 +13,11 @@ Innova Flor es un vivero costarricense que vende plantas ornamentales, maceteros
 ## 🛠️ Tecnologías utilizadas
 
 | Capa | Tecnología |
-|---|---|
 | Backend | Node.js + TypeScript |
 | Framework | Express.js |
-| Base de datos | MongoDB (driver nativo, sin Mongoose) |
+| Base de datos | MongoDB |
 | Frontend | HTML5 + CSS3 + Bootstrap 5 |
-| Entorno | XAMPP / localhost |
+| Servidor | localhost:3000 |
 
 ---
 
